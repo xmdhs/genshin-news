@@ -8,4 +8,5 @@ export default defineConfig({
     targets: ['defaults', 'not IE 11']
   }),
   ],
+  base: '/ip/genshin/',
 })
