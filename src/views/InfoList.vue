@@ -4,7 +4,7 @@
         <n-input
             size="medium"
             round
-            placeholder="搜索"
+            placeholder="正则搜索"
             clearable
             :on-update:value="(s) => keyWord = s"
         />
@@ -89,7 +89,15 @@ if (data.length == 0) {
         if (key) {
             keyF = setTimeout(() => {
                 if (key != keyWord.value) { return }
-                oldData = data.filter(v => v.title.indexOf(key) != -1)
+                let keyReg: RegExp;
+                try {
+                    keyReg = new RegExp(key, "i")
+                } catch (e) {
+                    message.error(String(e), { closable: true, duration: 1500 })
+                    console.warn(e)
+                    return
+                }
+                oldData = data.filter(v => keyReg.test(v.title))
                 cards.value = oldData.slice(0, 30)
                 pageCount.value = Math.ceil(oldData.length / 30) || 1
                 page.value = 1
