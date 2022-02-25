@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/dplayer': ^1.25.2
+  '@vitejs/plugin-legacy': ^1.7.1
   '@vitejs/plugin-vue': ^2.2.0
   dplayer: ^1.26.0
   naive-ui: ^2.25.5
@@ -12,6 +13,7 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
+  '@vitejs/plugin-legacy': 1.7.1_vite@2.8.4
   dplayer: 1.26.0
   naive-ui: 2.25.5_vue@3.2.31
   vue: 3.2.31
@@ -35,6 +37,11 @@ packages:
     resolution: {integrity: sha512-7yJPvPV+ESz2IUTPbOL+YkIGyCqOyNIzdguKQuJGnH7bg1WTIifuM21YqokFt/THWh1AkCRn9IgoykTRCBVpzA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+
+  /@babel/standalone/7.17.6:
+    resolution: {integrity: sha512-rBBC7aZ4Q8UkMV4Wl6cAw8Wcgg7DcIG3pzo2n+W/FwmBRZB/q7yGpzE10VXpOmSj9/KW3L1pbDhPGI1oOrscgA==}
+    engines: {node: '>=6.9.0'}
+    dev: false
 
   /@babel/types/7.17.0:
     resolution: {integrity: sha512-TmKSNO4D5rzhL5bjWFcVHHLETzfQ/AmbKpKPOSjlP0WoHZ6L911fgoOKY4Alp/emzG4cHJdyN49zpgkbXFEHHw==}
@@ -103,6 +110,20 @@ packages:
 
   /@types/node/14.14.45:
     resolution: {integrity: sha512-DssMqTV9UnnoxDWu959sDLZzfvqCF0qDNRjaWeYSui9xkFe61kKo4l1TWNTQONpuXEm+gLMRvdlzvNHBamzmEw==}
+    dev: false
+
+  /@vitejs/plugin-legacy/1.7.1_vite@2.8.4:
+    resolution: {integrity: sha512-RqgILXsGpfV7NHodVCdBVau8ss5+ynMXp6JGF/F7nhSy0bnwSQPlMS3KFqh7twfifXK8VuMriqfU4CxOiqmNnA==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      vite: ^2.8.0
+    dependencies:
+      '@babel/standalone': 7.17.6
+      core-js: 3.21.1
+      magic-string: 0.25.7
+      regenerator-runtime: 0.13.9
+      systemjs: 6.12.1
+      vite: 2.8.4
     dev: false
 
   /@vitejs/plugin-vue/2.2.2_vite@2.8.4+vue@3.2.31:
@@ -350,6 +371,11 @@ packages:
       '@babel/parser': 7.17.3
       '@babel/types': 7.17.0
     dev: true
+
+  /core-js/3.21.1:
+    resolution: {integrity: sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==}
+    requiresBuild: true
+    dev: false
 
   /css-render/0.15.8:
     resolution: {integrity: sha512-k1gp1MgYDPrFZhzheQkSwm6dmP6nPe2XE6WYpJBPwEc3GbMANPJZfxl7ofZlTl8/+tpMRiGTTgUkTlXaVbLxog==}
@@ -975,6 +1001,10 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
+  /regenerator-runtime/0.13.9:
+    resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
+    dev: false
+
   /request-light/0.5.7:
     resolution: {integrity: sha512-i/wKzvcx7Er8tZnvqSxWuNO5ZGggu2UgZAqj/RyZ0si7lBTXL7kZiI/dWxzxnQjaY7s5HEy1qK21Do4Ncr6cVw==}
     dev: true
@@ -1037,6 +1067,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /systemjs/6.12.1:
+    resolution: {integrity: sha512-hqTN6kW+pN6/qro6G9OZ7ceDQOcYno020zBQKpZQLsJhYTDMCMNfXi/Y8duF5iW+4WWZr42ry0MMkcRGpbwG2A==}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
