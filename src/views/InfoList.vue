@@ -6,7 +6,6 @@
             round
             placeholder="搜索"
             clearable
-            autofocus
             :on-update:value="(s) => keyWord = s"
         />
         <n-pagination v-model:page="page" :page-count="pageCount" show-quick-jumper />
