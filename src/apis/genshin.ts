@@ -27,9 +27,13 @@ export async function getAllContentList(channelId: string = `10`, noCache: boole
     let total = res.data.total
     let pageNum = Math.ceil(total / 1000)
     for (let i = 2; i <= pageNum; i++) {
-        let res = await getContentList(100, i, channelId)
+        let res = await getContentList(1000, i, channelId)
         list = list.concat(res.data.list)
     }
+    list.sort((a, b) => {
+        return Number(b.id) - Number(a.id)
+    })
+
     data = list
     return list
 }
