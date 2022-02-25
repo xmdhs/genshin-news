@@ -5,13 +5,16 @@
             v-for="{ channelId, title, id, imgSrc, time } in props.card"
             :key="id"
         >
-            <n-card :title="title" class="n-card" @click="onClick(id, title)">
+            <n-card :title="title" :class="$style['n-card']" @click="onClick(id, title)">
                 <template #cover>
                     <img :src="imgSrc || 'https://ys.mihoyo.com/main/_nuxt/img/37207c1.jpg'" />
                 </template>
-                <div class="between">
-                    <span>{{ channelId2String(channelId).join(" ") }}</span>
-                    <span>{{ time }}</span>
+                <div :class="$style.between">
+                    <div :class="$style.column">
+                        <span>{{ channelId2String(channelId).join(" ") }}</span>
+                        <span>{{ time }}</span>
+                    </div>
+                    <n-button @click.stop="open(`https://ys.mihoyo.com/main/news/detail/${id}`)">官网查看</n-button>
                 </div>
             </n-card>
         </n-grid-item>
@@ -21,12 +24,16 @@
 <script setup lang="ts">
 
 import { gcard } from '../interface/card'
-import { NCard, NGridItem, NGrid } from 'naive-ui'
+import { NCard, NGridItem, NGrid, NButton } from 'naive-ui'
 import router from '../router';
 
 const props = defineProps<{
     card: gcard[]
 }>()
+
+function open(url: string) {
+    window.open(url, "_blank", "noreferrer=yes")
+}
 
 function channelId2String(ids: string[]): string[] {
     let result: string[] = [];
@@ -56,15 +63,21 @@ function onClick(id: string, title: string) {
 
 </script>
 
-<style scoped>
-.n-card {
-    cursor: pointer;
-    height: 100%;
+<style module>
+.column {
+    display: flex;
+    flex-direction: column;
 }
 
 .between {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.n-card {
+    cursor: pointer;
+    height: 100%;
 }
 </style>

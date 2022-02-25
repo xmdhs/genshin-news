@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="$style.container">
     <n-message-provider>
       <router-view v-slot="{ Component, route }">
         <keep-alive>
@@ -16,7 +16,7 @@ import { NMessageProvider } from 'naive-ui'
 import { RouterView } from 'vue-router'
 </script>
 
-<style scoped>
+<style module>
 .container {
   width: 100%;
   margin-right: auto;

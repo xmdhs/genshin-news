@@ -33,7 +33,7 @@ const props = defineProps<{
 const loaded = ref(true)
 
 function open(url: string) {
-    window.open(url)
+    window.open(url, "_blank", "noreferrer=yes")
 }
 
 

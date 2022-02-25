@@ -40,7 +40,7 @@ export async function getAllContentList(channelId: string = `10`, noCache: boole
 
 
 const getgetViedoApi = `${cors}/https://ys.mihoyo.com/main/news/detail/`
-const viedoReg = /poster=.*?src=\\"(.*?)\\" style/
+const viedoReg = /src=\\"(.*?.mp4)\\"/
 
 export async function getViedo(id: string): Promise<string> {
     let res = await fetch(getgetViedoApi + id)
