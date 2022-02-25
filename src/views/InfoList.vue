@@ -82,6 +82,7 @@ if (data.length == 0) {
             oldData = []
             cards.value = data.slice(0, 30)
             pageCount.value = Math.ceil(data.length / 30) || 1
+            page.value = 1
             return
         }
         if (keyF) { clearTimeout(keyF) }
