@@ -91,6 +91,7 @@ if (data.length == 0) {
                 oldData = data.filter(v => v.title.indexOf(key) != -1)
                 cards.value = oldData.slice(0, 30)
                 pageCount.value = Math.ceil(oldData.length / 30) || 1
+                page.value = 1
             }, 200)
         }
     })
