@@ -7,7 +7,7 @@
         <n-input size="medium" round placeholder="正则搜索" clearable v-model:value="keyWord" />
         <div ref="listTopRef"></div>
         <n-space size="small" :align="'center'">
-            <n-pagination v-model:page="page" :page-count="pageCount" />
+            <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp" />
             <span>跳转</span>
             <n-input
                 v-model:value="enterV"
@@ -19,7 +19,7 @@
         </n-space>
         <GenshinCards :card="cards" />
         <n-space size="small" :align="'center'">
-            <n-pagination v-model:page="page" :page-count="pageCount" />
+            <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp" />
             <span>跳转</span>
             <n-input
                 v-model:value="enterV"
@@ -144,4 +144,7 @@ if (data.length == 0) {
 </script>
 
 <style module>
+.warp {
+    flex-wrap: wrap;
+}
 </style>
