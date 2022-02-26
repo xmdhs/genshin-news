@@ -1,16 +1,34 @@
 <template>
-    <n-skeleton text :repeat="10" v-if="!hasData" />
+    <n-spin v-if="!hasData">
+        <n-skeleton text :repeat="10" />
+        <template #description>数据加载中</template>
+    </n-spin>
     <n-space vertical v-if="hasData">
-        <n-input
-            size="medium"
-            round
-            placeholder="正则搜索"
-            clearable
-            :on-update:value="(s) => keyWord = s"
-        />
-        <n-pagination v-model:page="page" :page-count="pageCount" show-quick-jumper />
+        <n-input size="medium" round placeholder="正则搜索" clearable v-model:value="keyWord" />
+        <div ref="listTopRef"></div>
+        <n-space size="small" :align="'center'">
+            <n-pagination v-model:page="page" :page-count="pageCount" />
+            <span>跳转</span>
+            <n-input
+                v-model:value="enterV"
+                @keyup.enter="onenter"
+                :placeholder="''"
+                autosize
+                style="min-width: 2em"
+            ></n-input>
+        </n-space>
         <GenshinCards :card="cards" />
-        <n-pagination v-model:page="page" :page-count="pageCount" show-quick-jumper />
+        <n-space size="small" :align="'center'">
+            <n-pagination v-model:page="page" :page-count="pageCount" />
+            <span>跳转</span>
+            <n-input
+                v-model:value="enterV"
+                @keyup.enter="onenter"
+                :placeholder="''"
+                autosize
+                style="min-width: 2em"
+            ></n-input>
+        </n-space>
     </n-space>
 </template>
 
@@ -20,7 +38,7 @@ import GenshinCards from '../components/GenshinCards.vue'
 import { gcard } from '../interface/card';
 import { List } from '../interface/ContentList';
 import { getAllContentList } from '../apis/genshin';
-import { useMessage, NSkeleton, NPagination, NSpace, NInput } from 'naive-ui'
+import { useMessage, NSkeleton, NPagination, NSpace, NInput, NSpin } from 'naive-ui'
 
 const message = useMessage()
 
@@ -30,6 +48,7 @@ const pageCount = ref(1);
 const hasData = ref(false);
 let data: gcard[] = [];
 const keyWord = ref("");
+const listTopRef = ref<Element>();
 
 function onload() {
     document.title = "原神视频列表"
@@ -37,6 +56,20 @@ function onload() {
 
 onActivated(onload)
 onMounted(onload)
+
+const enterV = ref("")
+function onenter() {
+    if (isNaN(Number(enterV.value))) {
+        enterV.value = ""
+        return
+    }
+    if (Number(enterV.value) > pageCount.value) {
+        enterV.value = ""
+        return
+    }
+    page.value = Number(enterV.value)
+    enterV.value = ""
+}
 
 if (data.length == 0) {
     (async () => {
@@ -74,6 +107,7 @@ if (data.length == 0) {
     watch(page, (newVal) => {
         let d = oldData.length == 0 ? data : oldData
         cards.value = d.slice((newVal - 1) * 30, newVal * 30)
+        listTopRef.value?.scrollIntoView({ behavior: "smooth" })
     })
 
     watch(keyWord, (key) => {
@@ -109,8 +143,5 @@ if (data.length == 0) {
 
 </script>
 
-<style>
-.n-pagination {
-    flex-wrap: wrap;
-}
+<style module>
 </style>

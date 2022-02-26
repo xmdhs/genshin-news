@@ -9,6 +9,7 @@ declare module 'vue-router' {
 
 import InfoList from './views/InfoList.vue'
 import viedo from './views/viedo.vue'
+import NotFind from './views/NotFind.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,7 +26,13 @@ const routes: RouteRecordRaw[] = [
       id: route.params.id,
     }),
     meta: { scrollToTop: true }
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFind,
+    meta: { scrollToTop: true }
+  },
 ]
 
 const router = createRouter({

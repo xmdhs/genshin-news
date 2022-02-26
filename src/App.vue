@@ -1,19 +1,25 @@
 <template>
-  <div :class="$style.container">
-    <n-message-provider>
-      <router-view v-slot="{ Component, route }">
-        <keep-alive>
-          <component :is="Component" v-if="route.meta.keepAlive" />
-        </keep-alive>
-        <component :is="Component" v-if="!route.meta.keepAlive" />
-      </router-view>
-    </n-message-provider>
-  </div>
+  <n-message-provider>
+    <n-layout>
+      <n-layout-header bordered :class="$style.header">
+        <strong :class="$style.headerText" @click="router.push('/')">原神官网新闻列表</strong>
+      </n-layout-header>
+      <n-layout-content :class="$style.container" content-style="padding: 24px;">
+        <router-view v-slot="{ Component, route }">
+          <keep-alive>
+            <component :is="Component" v-if="route.meta.keepAlive" />
+          </keep-alive>
+          <component :is="Component" v-if="!route.meta.keepAlive" />
+        </router-view>
+      </n-layout-content>
+    </n-layout>
+  </n-message-provider>
 </template>
 
 <script setup lang="ts">
-import { NMessageProvider } from 'naive-ui'
-import { RouterView } from 'vue-router'
+import { NMessageProvider, NSpace, NLayout, NLayoutContent, NLayoutHeader } from 'naive-ui'
+import { RouterView, useRouter } from 'vue-router'
+const router = useRouter()
 </script>
 
 <style module>
@@ -21,7 +27,6 @@ import { RouterView } from 'vue-router'
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding: 1rem;
 }
 
 @media (min-width: 576px) {
@@ -45,5 +50,19 @@ import { RouterView } from 'vue-router'
   .container {
     max-width: 1130px;
   }
+}
+
+.headerText {
+  padding: 1rem 0.5rem;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
     <div id="dplayer" ref="dplayer" v-show="!loaded"></div>
-    <n-skeleton height="50vh" width="100%" v-show="loaded" />
-
+    <n-spin v-if="loaded">
+        <n-skeleton height="30vh" width="100%" />
+        <template #description>数据加载中</template>
+    </n-spin>
     <n-result status="warning" title="警告" description="此 id 没有视频" v-if="NotViedo">
         <template #footer>
             <n-space justify="center">
@@ -16,11 +18,12 @@
 
 <script setup lang="ts">
 import DPlayer, { DPlayerOptions } from 'dplayer';
-import { useMessage, NResult, NButton, NSpace, NSkeleton } from 'naive-ui';
+import { useMessage, NResult, NButton, NSpace, NSkeleton, NSpin } from 'naive-ui';
 import { ref, watchEffect } from 'vue';
-import { getAllContentList, getContentList, getViedo } from '../apis/genshin';
-import router from '../router';
+import { getAllContentList, getViedo } from '../apis/genshin';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const message = useMessage()
 
 const NotViedo = ref(false)
