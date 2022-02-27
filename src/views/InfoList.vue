@@ -57,7 +57,7 @@ const keyWord = ref("");
 const listTopRef = ref<Element>();
 
 function onload() {
-    document.title = "原神视频列表"
+    document.title = "原神新闻列表"
 }
 
 onActivated(onload)
