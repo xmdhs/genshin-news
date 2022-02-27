@@ -9,6 +9,9 @@ export async function getContentList(pageSize: number, pageNum: number, channelI
     u.append(`pageNum`, pageNum.toString())
     u.append(`channelId`, channelId)
     let res = await fetch(getContentListApi + u.toString())
+    if (res.status !== 200) {
+        throw new Error(`http code: ${res.status}`)
+    }
     let json = await res.json() as ContentList
     if (json.retcode !== 0) {
         throw new Error(json.message)
@@ -44,6 +47,9 @@ const viedoReg = /src=\\"(.*?.mp4)\\"/
 
 export async function getViedo(id: string): Promise<string> {
     let res = await fetch(getgetViedoApi + id)
+    if (res.status !== 200) {
+        throw new Error(`http code: ${res.status}`)
+    }
     let t = await res.text()
     let r = viedoReg.exec(t)
     if (r === null) {
