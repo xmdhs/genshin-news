@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import DPlayer, { DPlayerOptions } from 'dplayer';
 import { useMessage, NResult, NButton, NSpace, NSkeleton, NSpin } from 'naive-ui';
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, onBeforeUnmount } from 'vue';
 import { getAllContentList, getViedo } from '../apis/genshin';
 import { useRouter } from 'vue-router';
 
@@ -33,12 +33,18 @@ const props = defineProps<{
     id: string
 }>()
 
+onBeforeUnmount(() => {
+    adplayer?.destroy()
+})
+
+
 const loaded = ref(true)
 
 function open(url: string) {
     window.open(url, "_blank", "noreferrer=yes")
 }
 
+let adplayer: DPlayer;
 
 watchEffect(async () => {
     try {
@@ -54,7 +60,7 @@ watchEffect(async () => {
             return
         }
         if (dplayer.value) {
-            newPlayer(dplayer.value, r)
+            adplayer = newPlayer(dplayer.value, r)
         }
         loaded.value = false
     } catch (e) {

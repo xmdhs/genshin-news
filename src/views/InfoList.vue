@@ -6,29 +6,35 @@
     <n-space vertical v-if="hasData">
         <n-input size="medium" round placeholder="正则搜索" clearable v-model:value="keyWord" />
         <div ref="listTopRef"></div>
-        <n-space size="small" :align="'center'">
-            <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp" />
-            <span>跳转</span>
-            <n-input
-                v-model:value="enterV"
-                @keyup.enter="onenter"
-                :placeholder="''"
-                autosize
-                style="min-width: 2em"
-            ></n-input>
-        </n-space>
+        <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp">
+            <template #suffix>
+                <n-space size="small" :align="'center'">
+                    <span>跳转</span>
+                    <n-input
+                        v-model:value="enterV"
+                        @keyup.enter="onenter"
+                        :placeholder="''"
+                        autosize
+                        style="min-width: 3em"
+                    ></n-input>
+                </n-space>
+            </template>
+        </n-pagination>
         <GenshinCards :card="cards" />
-        <n-space size="small" :align="'center'">
-            <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp" />
-            <span>跳转</span>
-            <n-input
-                v-model:value="enterV"
-                @keyup.enter="onenter"
-                :placeholder="''"
-                autosize
-                style="min-width: 2em"
-            ></n-input>
-        </n-space>
+        <n-pagination v-model:page="page" :page-count="pageCount" :class="$style.warp">
+            <template #suffix>
+                <n-space size="small" :align="'center'">
+                    <span>跳转</span>
+                    <n-input
+                        v-model:value="enterV"
+                        @keyup.enter="onenter"
+                        :placeholder="''"
+                        autosize
+                        style="min-width: 3em"
+                    ></n-input>
+                </n-space>
+            </template>
+        </n-pagination>
     </n-space>
 </template>
 
@@ -146,5 +152,6 @@ if (data.length == 0) {
 <style module>
 .warp {
     flex-wrap: wrap;
+    align-items: center;
 }
 </style>
