@@ -8,9 +8,14 @@
         <template #footer>
             <n-space justify="center">
                 <n-button @click="router.go(-1)">返回列表</n-button>
-                <n-button
-                    @click="open('https://ys.mihoyo.com/main/news/detail/' + props.id)"
-                >到米哈游官网查看</n-button>
+                <a
+                    :href="'https://ys.mihoyo.com/main/news/detail/' + props.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="text-decoration: none; color: inherit;"
+                >
+                    <n-button>到米哈游官网查看</n-button>
+                </a>
             </n-space>
         </template>
     </n-result>
@@ -37,12 +42,7 @@ onBeforeUnmount(() => {
     adplayer?.destroy()
 })
 
-
 const loaded = ref(true)
-
-function open(url: string) {
-    window.open(url, "_blank", "noreferrer=yes")
-}
 
 let adplayer: DPlayer;
 

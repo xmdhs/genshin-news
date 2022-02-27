@@ -5,16 +5,27 @@
             v-for="{ channelId, title, id, imgSrc, time } in props.card"
             :key="id"
         >
-            <n-card :title="title" :class="$style['n-card']" @click="onClick(id, title)">
+            <n-card :title="title" :class="$style['n-card']" @click.prevent="onClick(id, title)">
                 <template #cover>
-                    <img :src="imgSrc || 'https://ys.mihoyo.com/main/_nuxt/img/37207c1.jpg'" />
+                    <router-link :to="'/info/' + id">
+                        <img :src="imgSrc || 'https://ys.mihoyo.com/main/_nuxt/img/37207c1.jpg'" />
+                    </router-link>
                 </template>
                 <div :class="$style.between">
                     <div :class="$style.column">
                         <span>{{ channelId2String(channelId).join(" ") }}</span>
                         <span>{{ time }}</span>
                     </div>
-                    <n-button @click.stop="open(`https://ys.mihoyo.com/main/news/detail/${id}`)">官网查看</n-button>
+                    <a
+                        :href="`https://ys.mihoyo.com/main/news/detail/${id}`"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="text-decoration: none; color: inherit;"
+                    >
+                        <n-button
+                            @click.stop.prevent="open(`https://ys.mihoyo.com/main/news/detail/${id}`)"
+                        >官网查看</n-button>
+                    </a>
                 </div>
             </n-card>
         </n-grid-item>
@@ -25,7 +36,9 @@
 
 import { gcard } from '../interface/card'
 import { NCard, NGridItem, NGrid, NButton } from 'naive-ui'
-import router from '../router';
+import { useRouter, RouterLink } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps<{
     card: gcard[]
