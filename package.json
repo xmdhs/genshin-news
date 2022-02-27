@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "preinstall": "npx only-allow pnpm"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^1.7.1",
