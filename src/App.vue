@@ -2,7 +2,9 @@
   <n-message-provider>
     <n-layout>
       <n-layout-header bordered :class="$style.header">
-        <strong :class="$style.headerText" @click="router.push('/')">原神官网新闻列表</strong>
+        <router-link to="/" :class="$style.headerText">
+          <strong>原神官网新闻列表</strong>
+        </router-link>
       </n-layout-header>
       <n-layout-content :class="$style.container" content-style="padding: 24px;">
         <router-view v-slot="{ Component, route }">
@@ -17,9 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { NMessageProvider, NSpace, NLayout, NLayoutContent, NLayoutHeader } from 'naive-ui'
-import { RouterView, useRouter } from 'vue-router'
-const router = useRouter()
+import { NMessageProvider, NLayout, NLayoutContent, NLayoutHeader } from 'naive-ui'
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <style module>
@@ -56,6 +57,8 @@ const router = useRouter()
   padding: 1rem 0.5rem;
   font-size: 20px;
   cursor: pointer;
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .header {
