@@ -7,7 +7,9 @@
     <n-result status="warning" title="警告" description="此 id 没有视频" v-if="NotViedo">
         <template #footer>
             <n-space justify="center">
-                <n-button @click="router.go(-1)">返回列表</n-button>
+                <router-link to="/" style="text-decoration: none; color: inherit;">
+                    <n-button>返回列表</n-button>
+                </router-link>
                 <a
                     :href="'https://ys.mihoyo.com/main/news/detail/' + props.id"
                     target="_blank"
@@ -26,9 +28,8 @@ import DPlayer, { DPlayerOptions } from 'dplayer';
 import { useMessage, NResult, NButton, NSpace, NSkeleton, NSpin } from 'naive-ui';
 import { ref, watchEffect, onBeforeUnmount } from 'vue';
 import { getAllContentList, getViedo } from '../apis/genshin';
-import { useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 
-const router = useRouter();
 const message = useMessage()
 
 const NotViedo = ref(false)
