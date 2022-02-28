@@ -1,4 +1,5 @@
 import { ContentList, List } from '../interface/ContentList'
+import { useDB } from '../utils/indexdb'
 
 const cors = `https://quiet-disk-7a77.xmdhs.workers.dev`
 const getContentListApi = `${cors}/https://ys.mihoyo.com/content/ysCn/getContentList?`
@@ -19,25 +20,42 @@ export async function getContentList(pageSize: number, pageNum: number, channelI
     return json
 }
 
-let data: List[] = []
-
 export async function getAllContentList(channelId: string = `10`, noCache: boolean = false): Promise<List[]> {
-    if (!noCache && data.length > 0) {
-        return data
+    let db = await useDB()
+    if (!noCache) {
+        let c = await db.get('total', "total")
+        if (c != null) {
+            let data = await getContentList(1, 1, channelId)
+            if (c == data.data.total) {
+                let list = await db.getAll('list')
+                list.sort((a, b) => {
+                    return Number(b.id) - Number(a.id)
+                })
+                return list
+            }
+        }
     }
-    let res = await getContentList(1000, 1, channelId)
+    let res = await getContentList(2000, 1, channelId)
     let list = res.data.list
     let total = res.data.total
-    let pageNum = Math.ceil(total / 1000)
+    let pageNum = Math.ceil(total / 2000)
     for (let i = 2; i <= pageNum; i++) {
-        let res = await getContentList(1000, i, channelId)
+        let res = await getContentList(2000, i, channelId)
         list = list.concat(res.data.list)
     }
     list.sort((a, b) => {
         return Number(b.id) - Number(a.id)
     })
 
-    data = list
+    let tx = db.transaction(['list', 'total'], 'readwrite')
+    let lists = tx.objectStore('list')
+    let totals = tx.objectStore('total')
+    await lists.clear()
+    for (const v of list) {
+        await lists.put(v)
+    }
+    await totals.put(total, "total")
+    await tx.done
     return list
 }
 

@@ -5,6 +5,7 @@ specifiers:
   '@vitejs/plugin-legacy': ^1.7.1
   '@vitejs/plugin-vue': ^2.2.0
   dplayer: ^1.26.0
+  idb: ^7.0.0
   naive-ui: ^2.25.5
   typescript: ^4.5.4
   vite: ^2.8.0
@@ -15,6 +16,7 @@ specifiers:
 dependencies:
   '@vitejs/plugin-legacy': 1.7.1_vite@2.8.4
   dplayer: 1.26.0
+  idb: 7.0.0
   naive-ui: 2.25.5_vue@3.2.31
   vue: 3.2.31
   vue-router: 4.0.12_vue@3.2.31
@@ -741,6 +743,10 @@ packages:
       domutils: 2.8.0
       entities: 3.0.1
     dev: true
+
+  /idb/7.0.0:
+    resolution: {integrity: sha512-jSx0WOY9Nj+QzP6wX5e7g64jqh8ExtDs/IAuOrOEZCD/h6+0HqyrKsDMfdJc0hqhSvh0LsrwqrkDn+EtjjzSRA==}
+    dev: false
 
   /is-core-module/2.8.1:
     resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
