@@ -5,29 +5,33 @@
             v-for="{ channelId, title, id, imgSrc, time } in props.card"
             :key="id"
         >
-            <n-card :title="title" :class="$style['n-card']" @click.prevent="onClick(id, title)">
-                <template #cover>
-                    <router-link :to="'/info/' + id">
+            <router-link :to="'/info/' + id" :class="$style.a">
+                <n-card
+                    :title="title"
+                    :class="$style['n-card']"
+                    @click.prevent="onClick(id, title)"
+                >
+                    <template #cover>
                         <img :src="imgSrc || 'https://ys.mihoyo.com/main/_nuxt/img/37207c1.jpg'" />
-                    </router-link>
-                </template>
-                <div :class="$style.between">
-                    <div :class="$style.column">
-                        <span>{{ channelId2String(channelId).join(" ") }}</span>
-                        <span>{{ time }}</span>
+                    </template>
+                    <div :class="$style.between">
+                        <div :class="$style.column">
+                            <span>{{ channelId2String(channelId).join(" ") }}</span>
+                            <span>{{ time }}</span>
+                        </div>
+                        <a
+                            :href="`https://ys.mihoyo.com/main/news/detail/${id}`"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            :class="$style.a"
+                        >
+                            <n-button
+                                @click.stop.prevent="open(`https://ys.mihoyo.com/main/news/detail/${id}`)"
+                            >官网查看</n-button>
+                        </a>
                     </div>
-                    <a
-                        :href="`https://ys.mihoyo.com/main/news/detail/${id}`"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style="text-decoration: none; color: inherit;"
-                    >
-                        <n-button
-                            @click.stop.prevent="open(`https://ys.mihoyo.com/main/news/detail/${id}`)"
-                        >官网查看</n-button>
-                    </a>
-                </div>
-            </n-card>
+                </n-card>
+            </router-link>
         </n-grid-item>
     </n-grid>
 </template>
@@ -92,5 +96,10 @@ function onClick(id: string, title: string) {
 .n-card {
     cursor: pointer;
     height: 100%;
+}
+
+.a{
+    text-decoration: inherit;
+    color: inherit;
 }
 </style>
