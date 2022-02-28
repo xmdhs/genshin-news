@@ -29,6 +29,7 @@ import { useMessage, NResult, NButton, NSpace, NSkeleton, NSpin } from 'naive-ui
 import { ref, watchEffect, onBeforeUnmount } from 'vue';
 import { getAllContentList, getViedo } from '../apis/genshin';
 import { RouterLink } from 'vue-router';
+import { useDB } from '../utils/indexdb';
 
 const message = useMessage()
 
@@ -49,8 +50,12 @@ let adplayer: DPlayer;
 
 watchEffect(async () => {
     try {
-        let d = await getAllContentList()
-        let v = d.find(item => item.id == props.id)
+        let db = await useDB()
+        let v = await db.get('list', props.id)
+        if (v == null) {
+            let d = await getAllContentList()
+            v = d.find(item => item.id == props.id)
+        }
         if (v) {
             document.title = v.title
         }
