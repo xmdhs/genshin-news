@@ -1,7 +1,7 @@
 import { ContentList, List } from '../interface/ContentList'
 import { useDB } from '../utils/indexdb'
 
-const cors = `https://quiet-disk-7a77.xmdhs.workers.dev`
+const cors = `https://cors.xmdhs.com`
 const getContentListApi = `${cors}/https://ys.mihoyo.com/content/ysCn/getContentList?`
 
 export async function getContentList(pageSize: number, pageNum: number, channelId: string = `10`): Promise<ContentList> {
