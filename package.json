@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-legacy": "^1.7.1",
     "dplayer": "^1.26.0",
     "idb": "^7.0.0",
     "naive-ui": "^2.25.5",
@@ -17,7 +16,8 @@
   },
   "devDependencies": {
     "@types/dplayer": "^1.25.2",
-    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "@vitejs/plugin-legacy": "^2.0.0",
     "typescript": "^4.5.4",
     "vite": "^3.0.2",
     "vue-tsc": "^0.39.0"
